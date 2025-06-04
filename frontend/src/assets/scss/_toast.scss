@@ -1,0 +1,75 @@
+// _toast.scss
+
+.toast {
+    --w-toast-zindex: 1090;
+    --w-toast-padding-x: 0.75rem;
+    --w-toast-padding-y: 0.5rem;
+    --w-toast-spacing: 1.5rem; // Khoảng cách giữa các toasts trong container
+    --w-toast-max-width: 350px;
+    --w-toast-font-size: 0.875rem;
+    --w-toast-color: ; // Sẽ được xác định bởi nội dung hoặc theme
+    --w-toast-bg: rgba(var(--w-body-bg-rgb), 0.85); // Màu nền với độ trong suốt
+    --w-toast-border-width: var(--w-border-width);
+    --w-toast-border-color: var(--w-border-color-translucent);
+    --w-toast-border-radius: var(--w-border-radius);
+    --w-toast-box-shadow: var(--w-box-shadow);
+    --w-toast-header-color: var(--w-secondary-color);
+    --w-toast-header-bg: rgba(var(--w-body-bg-rgb), 0.85);
+    --w-toast-header-border-color: var(--w-border-color-translucent);
+
+    width: var(--w-toast-max-width);
+    max-width: 100%;
+    font-size: var(--w-toast-font-size);
+    color: var(--w-toast-color);
+    pointer-events: auto;
+    background-color: var(--w-toast-bg);
+    background-clip: padding-box;
+    border: var(--w-toast-border-width) solid var(--w-toast-border-color);
+    box-shadow: var(--w-toast-box-shadow);
+    border-radius: var(--w-toast-border-radius);
+
+    &.showing {
+        opacity: 0; // Trạng thái bắt đầu của animation fade-in
+    }
+
+    &:not(.show) {
+        display: none;
+    }
+}
+
+.toast-container {
+    --w-toast-zindex: 1090; // Đảm bảo giống với toast hoặc cao hơn nếu cần
+    position: absolute; // Hoặc fixed tùy theo vị trí mong muốn
+    z-index: var(--w-toast-zindex);
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    max-width: 100%;
+    pointer-events: none; // Container không bắt sự kiện, chỉ toast con bắt
+
+    > :not(:last-child) {
+        margin-bottom: var(--w-toast-spacing);
+    }
+}
+
+.toast-header {
+    display: flex;
+    align-items: center;
+    padding: var(--w-toast-padding-y) var(--w-toast-padding-x);
+    color: var(--w-toast-header-color);
+    background-color: var(--w-toast-header-bg);
+    background-clip: padding-box;
+    border-bottom: var(--w-toast-border-width) solid var(--w-toast-header-border-color);
+    border-top-left-radius: calc(var(--w-toast-border-radius) - var(--w-toast-border-width));
+    border-top-right-radius: calc(var(--w-toast-border-radius) - var(--w-toast-border-width));
+
+    .btn-close {
+        margin-right: calc(-0.5 * var(--w-toast-padding-x));
+        margin-left: var(--w-toast-padding-x);
+    }
+}
+
+.toast-body {
+    padding: var(--w-toast-padding-x); // Bootstrap thường dùng padding giống nhau cho x và y ở body
+    word-wrap: break-word;
+}

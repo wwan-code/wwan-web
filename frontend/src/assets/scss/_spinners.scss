@@ -1,0 +1,72 @@
+// _spinners.scss
+
+@keyframes spinner-border {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner-border {
+    --w-spinner-width: 2rem;
+    --w-spinner-height: 2rem;
+    --w-spinner-vertical-align: -0.125em;
+    --w-spinner-border-width: 0.25em;
+    --w-spinner-animation-speed: 0.75s;
+    --w-spinner-animation-name: spinner-border;
+
+    display: inline-block;
+    width: var(--w-spinner-width);
+    height: var(--w-spinner-height);
+    vertical-align: var(--w-spinner-vertical-align);
+    border: var(--w-spinner-border-width) solid currentcolor;
+    border-right-color: transparent; // Tạo hiệu ứng xoay
+    border-radius: 50%;
+    animation: var(--w-spinner-animation-name) var(--w-spinner-animation-speed) linear infinite;
+
+    &-sm {
+        --w-spinner-width: 1rem;
+        --w-spinner-height: 1rem;
+        --w-spinner-border-width: 0.2em;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        --w-spinner-animation-speed: 1.5s; // Chậm hơn cho reduce motion
+    }
+}
+
+
+@keyframes spinner-grow {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.spinner-grow {
+    --w-spinner-width: 2rem;
+    --w-spinner-height: 2rem;
+    --w-spinner-vertical-align: -0.125em;
+    --w-spinner-animation-speed: 0.75s;
+    --w-spinner-animation-name: spinner-grow;
+
+    display: inline-block;
+    width: var(--w-spinner-width);
+    height: var(--w-spinner-height);
+    vertical-align: var(--w-spinner-vertical-align);
+    background-color: currentcolor;
+    border-radius: 50%;
+    opacity: 0;
+    animation: var(--w-spinner-animation-name) var(--w-spinner-animation-speed) linear infinite;
+
+    &-sm {
+        --w-spinner-width: 1rem;
+        --w-spinner-height: 1rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        --w-spinner-animation-speed: 1.5s;
+    }
+}

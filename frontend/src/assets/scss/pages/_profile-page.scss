@@ -1,0 +1,411 @@
+// src/assets/scss/pages/_profile-page.scss
+$profile-sidebar-width-lg: 300px;
+$profile-sidebar-width-md: 260px;
+$profile-content-gap: 1.5rem;
+$profile-tab-active-border-height: 3px;
+
+.profile-page-wrapper {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: calc(100vh - var(--w-header-height) - var(--w-footer-height, 100px));
+    padding-top: calc(var(--w-header-height) + 24px);
+    padding-bottom: 3rem;
+}
+
+.profile-page-container {
+    position: relative;
+    z-index: 1;
+}
+
+.profile-breadcrumb {
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    .breadcrumb-custom {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        font-size: 0.875rem;
+    }
+    .breadcrumb-item-custom {
+        a {
+            color: var(--w-link-color);
+            text-decoration: none;
+            &:hover { color: var(--w-primary); }
+        }
+        &.active {
+            color: var(--w-secondary-text-emphasis);
+        }
+        + .breadcrumb-item-custom::before {
+            content: "/";
+            padding: 0 0.5rem;
+            color: var(--w-border-color);
+        }
+    }
+}
+
+
+.profile-grid {
+    display: grid;
+    gap: 1.75rem;
+
+    @media (min-width: 992px) {
+        grid-template-columns: minmax(280px, 1fr) 3fr;
+    }
+}
+
+.profile-sidebar {
+    padding-top: 2rem;
+    @media (min-width: 992px) {
+        padding-top: 0;
+    }
+    .profile-section-card,
+    .profile-header-card {
+        margin-bottom: var(--profile-content-gap, 1.75rem);
+    }
+    .card-profile {
+        margin-bottom: 1.5rem;
+    }
+
+    .profile-stats-summary {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        text-align: center;
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--w-secondary-text-emphasis);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--w-primary);
+
+            &.level-badge {
+                background-color: var(--w-primary-bg-subtle);
+                padding: 0.2em 0.5em;
+                border-radius: var(--w-border-radius-sm);
+            }
+
+            &.points-badge {
+                color: var(--w-success);
+            }
+        }
+
+        .stat-item-progress { grid-column: 1 / -1; margin-top: 0.5rem; }
+
+        .progress-bar-container-profile { height: 6px; background-color: var(--w-border-color); border-radius: 10px;}
+        .progress-bar-custom-profile { height: 100%; background: var(--w-primary-gradient, var(--w-primary)); border-radius: 10px; span {display: none;} }
+        .progress-points-display { font-size: 0.7rem; color: var(--w-tertiary-color); margin-top: 0.25rem; display: block;}
+    }
+}
+
+.profile-main-content {
+}
+
+.profile-tabs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 0;
+    margin-bottom: 1.5rem;
+
+    .profile-tab-link {
+        white-space: nowrap;
+        background: none;
+        border: none;
+        padding: 0.25rem 0.75rem;
+        border-radius: var(--w-border-radius-md);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--w-secondary-text-emphasis);
+        cursor: pointer;
+        position: relative;
+        border-bottom: $profile-tab-active-border-height solid transparent;
+        margin-bottom: -1px;
+        transition: color 0.2s ease, border-color 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+
+        .icon-before {
+            margin-right: 0.6em;
+            opacity: 0.8;
+            font-size: 0.95em;
+        }
+
+        &:hover {
+            color: var(--w-primary);
+            background-color: var(--w-body-tertiary-bg);
+        }
+
+        &.active {
+            color: var(--w-primary);
+            font-weight: 600;
+            border-bottom-color: var(--w-primary);
+
+            .icon-before {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.profile-tab-content {
+    .profile-content-section {
+        background-color: var(--w-card-bg);
+        border-radius: var(--w-border-radius-md); // Bo góc nhỏ hơn card chính
+        padding: var(--w-card-spacer-y) var(--w-card-spacer-x);
+        box-shadow: var(--w-box-shadow);
+        margin-bottom: var(--profile-content-gap, 1.5rem);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--w-border-color-translucent);
+        }
+
+        &__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--w-body-color);
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            .icon-before {
+                margin-right: 0.6em;
+                color: var(--w-primary);
+            }
+        }
+    }
+    .challenges-user-list { // Dùng lại class .challenges-grid nếu muốn
+        display: grid;
+        grid-template-columns: 1fr; // Hoặc repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+        // ChallengeCard đã có style riêng
+    }
+}
+
+.profile-info-display {
+    .profile-info-row {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.75rem 0;
+        font-size: 0.9rem;
+    }
+    .profile-info-label {
+        flex-basis: 120px;
+        font-weight: 500;
+        color: var(--w-secondary-text-emphasis);
+        margin-right: 1rem;
+    }
+    .profile-info-value {
+        flex-grow: 1;
+        color: var(--w-body-color);
+        word-break: break-word;
+        &.link {
+            color: var(--w-link-color);
+            text-decoration: none;
+            &:hover { text-decoration: underline; color: var(--w-primary); }
+        }
+    }
+    .profile-info-divider {
+        margin: 0;
+        border-color: var(--w-border-color-translucent);
+        opacity: 0.5;
+        &:last-of-type { // Ẩn đường kẻ cuối cùng
+            display: none;
+        }
+    }
+}
+
+.privacy-settings-form {
+    margin-top: 1rem;
+    text-align: left; // Căn trái nội dung form
+
+    .form-group-privacy {
+        margin-bottom: 1rem;
+
+        .form-label-privacy {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--w-secondary-text-emphasis);
+        }
+
+        .form-select-privacy {
+            // Style cho select box (có thể dùng lại style của .form-select nếu có)
+            display: block;
+            width: 100%;
+            padding: 0.45rem 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--w-body-color);
+            background-color: var(--w-input-bg, var(--w-body-bg));
+            background-clip: padding-box;
+            border: 1px solid var(--w-border-color);
+            border-radius: var(--w-border-radius-sm);
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+            &:focus {
+                border-color: var(--w-primary);
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgba(var(--w-primary-rgb), .25);
+            }
+        }
+    }
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.inventory-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--w-body-bg);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s;
+
+    &--active {
+        border-color: #0d6efd;
+        box-shadow: 0 0 10px rgba(13, 110, 253, 0.15);
+    }
+
+    &__top {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    &__icon-wrapper {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    &__icon {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    &__info {
+        flex: 1;
+    }
+
+    &__name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--w-body-color);
+        margin-bottom: 0.25rem;
+    }
+
+    &__description {
+        font-size: 0.875rem;
+        color: var(--w-secondary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    &__meta {
+        font-size: 0.75rem;
+        color: var(--w-secondary-color);
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        .expired {
+            color: #dc3545;
+            font-weight: 600;
+        }
+    }
+
+    &__bottom {
+        margin-top: 1rem;
+        text-align: right;
+    }
+
+    &__action-btn {
+        background-color: var(--w-primary);
+        color: #fff;
+        padding: 0.4rem 0.8rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background-color 0.2s ease;
+
+        &:hover:not(:disabled) {
+            background-color: rgba(var(--w-primary-rgb), 0.5);
+        }
+
+        &.btn-deactivate {
+            background-color: #dc3545;
+
+            &:hover:not(:disabled) {
+                background-color: #b02a37;
+            }
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .inventory-card {
+        padding: 0.75rem;
+
+        &__top {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        &__icon-wrapper {
+            width: 80px;
+            height: 80px;
+        }
+
+        &__bottom {
+            text-align: center;
+        }
+    }
+}

@@ -1,0 +1,110 @@
+// _tooltip.scss
+
+.tooltip {
+    --w-tooltip-zindex: 1080;
+    --w-tooltip-max-width: 200px;
+    --w-tooltip-padding-x: 0.5rem;
+    --w-tooltip-padding-y: 0.25rem;
+    --w-tooltip-margin: ;
+    --w-tooltip-font-size: 0.875rem;
+    --w-tooltip-color: var(--w-body-bg);
+    --w-tooltip-bg: var(--w-emphasis-color);
+    --w-tooltip-border-radius: var(--w-border-radius);
+    --w-tooltip-opacity: 0.9;
+    --w-tooltip-arrow-width: 0.8rem;
+    --w-tooltip-arrow-height: 0.4rem;
+
+    z-index: var(--w-tooltip-zindex);
+    display: block;
+    margin: var(--w-tooltip-margin);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: start;
+    text-decoration: none;
+    text-shadow: none;
+    text-transform: none;
+    letter-spacing: normal;
+    word-break: normal;
+    white-space: normal;
+    word-spacing: normal;
+    line-break: auto;
+    font-size: var(--w-tooltip-font-size);
+    word-wrap: break-word;
+    opacity: 0;
+
+    &.show {
+        opacity: var(--w-tooltip-opacity);
+    }
+
+    .tooltip-arrow {
+        display: block;
+        width: var(--w-tooltip-arrow-width);
+        height: var(--w-tooltip-arrow-height);
+
+        &::before {
+            position: absolute;
+            content: "";
+            border-color: transparent;
+            border-style: solid;
+        }
+    }
+}
+
+// Vị trí mũi tên, Bootstrap sử dụng data-popper-placement
+// Top
+.bs-tooltip-top .tooltip-arrow,
+.bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow {
+    bottom: calc(-1 * var(--w-tooltip-arrow-height));
+    &::before {
+        top: -1px; // Hoặc 0 tùy vào border-width
+        border-width: var(--w-tooltip-arrow-height) calc(var(--w-tooltip-arrow-width) * 0.5) 0;
+        border-top-color: var(--w-tooltip-bg);
+    }
+}
+
+// Right (End)
+.bs-tooltip-end .tooltip-arrow,
+.bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow {
+    left: calc(-1 * var(--w-tooltip-arrow-height));
+    width: var(--w-tooltip-arrow-height); // Swap width/height
+    height: var(--w-tooltip-arrow-width);
+    &::before {
+        right: -1px; // Hoặc 0
+        border-width: calc(var(--w-tooltip-arrow-width) * 0.5) var(--w-tooltip-arrow-height) calc(var(--w-tooltip-arrow-width) * 0.5) 0;
+        border-right-color: var(--w-tooltip-bg);
+    }
+}
+
+// Bottom
+.bs-tooltip-bottom .tooltip-arrow,
+.bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow {
+    top: calc(-1 * var(--w-tooltip-arrow-height));
+    &::before {
+        bottom: -1px; // Hoặc 0
+        border-width: 0 calc(var(--w-tooltip-arrow-width) * 0.5) var(--w-tooltip-arrow-height);
+        border-bottom-color: var(--w-tooltip-bg);
+    }
+}
+
+// Left (Start)
+.bs-tooltip-start .tooltip-arrow,
+.bs-tooltip-auto[data-popper-placement^="left"] .tooltip-arrow {
+    right: calc(-1 * var(--w-tooltip-arrow-height));
+    width: var(--w-tooltip-arrow-height); // Swap width/height
+    height: var(--w-tooltip-arrow-width);
+    &::before {
+        left: -1px; // Hoặc 0
+        border-width: calc(var(--w-tooltip-arrow-width) * 0.5) 0 calc(var(--w-tooltip-arrow-width) * 0.5) var(--w-tooltip-arrow-height);
+        border-left-color: var(--w-tooltip-bg);
+    }
+}
+
+.tooltip-inner {
+    max-width: var(--w-tooltip-max-width);
+    padding: var(--w-tooltip-padding-y) var(--w-tooltip-padding-x);
+    color: var(--w-tooltip-color);
+    text-align: center;
+    background-color: var(--w-tooltip-bg);
+    border-radius: var(--w-tooltip-border-radius);
+}

@@ -1,0 +1,169 @@
+// src/assets/scss/components/challenges/_challenge-card.scss
+.challenge-card {
+    background-color: var(--w-card-bg);
+    border: 1px solid var(--w-border-color-translucent);
+    border-radius: var(--w-border-radius-md);
+    box-shadow: var(--w-box-shadow-sm);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative; // Cho link overlay
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--w-box-shadow);
+    }
+
+    &__link-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: 1; // Nằm trên cùng để bắt click
+    }
+
+    &__cover {
+        height: 150px; // Chiều cao ảnh bìa
+        background-color: var(--w-secondary-bg-subtle);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    &__cover-placeholder {
+        color: var(--w-secondary-color);
+        i { font-size: 3rem; opacity: 0.5; }
+    }
+    &__type-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        background-color: rgba(var(--w-dark-rgb, (33,37,41)), 0.7);
+        color: #fff;
+        padding: 0.25rem 0.6rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+        border-radius: var(--w-border-radius-pill);
+        text-transform: capitalize;
+        z-index: 2;
+    }
+
+    &__content {
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative; // Để nút action nằm trên
+        z-index: 2;
+    }
+
+    &__title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--w-headings-color);
+        margin-bottom: 0.3rem;
+        line-height: 1.3;
+        // Giới hạn 2 dòng
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+        overflow: hidden; text-overflow: ellipsis;
+    }
+    &__description {
+        font-size: 0.85rem;
+        color: var(--w-secondary-text-emphasis);
+        margin-bottom: 0.75rem;
+        line-height: 1.4;
+        // Giới hạn 3 dòng
+        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+        overflow: hidden; text-overflow: ellipsis;
+    }
+    &__criteria {
+        font-size: 0.8rem;
+        color: var(--w-tertiary-color);
+        margin-bottom: 0.75rem;
+        font-style: italic;
+    }
+    &__rewards {
+        margin-bottom: 0.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        .reward-tag {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--w-border-radius-sm);
+            background-color: var(--w-body-tertiary-bg);
+            color: var(--w-body-color);
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--w-border-color-translucent);
+        }
+        .icon-before-small { margin-right: 0.3em; font-size: 0.9em; }
+        .reward-icon-img { width: 16px; height: 16px; margin-right: 0.3em; border-radius: 3px; }
+        .points-reward { color: var(--w-warning); border-color: var(--w-warning); background-color: var(--w-warning-bg-subtle); }
+        .badge-reward { color: var(--w-info); border-color: var(--w-info); background-color: var(--w-info-bg-subtle);}
+        .shopitem-reward { color: var(--w-success); border-color: var(--w-success); background-color: var(--w-success-bg-subtle); }
+    }
+    &__deadline {
+        font-size: 0.75rem;
+        color: var(--w-danger-text-emphasis);
+        font-weight: 500;
+        margin-bottom: 0.75rem;
+        background-color: var(--w-danger-bg-subtle);
+        padding: 0.2rem 0.4rem;
+        border-radius: var(--w-border-radius-sm);
+        display: inline-block;
+    }
+
+    &__progress-section {
+        margin-top: auto; // Đẩy xuống dưới nếu content trên ngắn
+        padding-top: 0.75rem;
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--w-secondary-text-emphasis);
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .progress-bar-challenge {
+            height: 8px;
+            background-color: var(--w-border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            &__filled {
+                height: 100%;
+                background-color: var(--w-success); // Màu cho progress
+                border-radius: 8px;
+                transition: width 0.3s ease;
+            }
+        }
+    }
+
+    &__actions {
+        margin-top: 1rem; // Khoảng cách với progress hoặc rewards
+        text-align: right;
+        .btn-custom { /* Kế thừa style */ }
+        .status-badge {
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.3em 0.6em;
+            border-radius: var(--w-border-radius-sm);
+            &.status-claimed { background-color: var(--w-success-bg-subtle); color: var(--w-success-text-emphasis); }
+            &.status-in-progress { background-color: var(--w-info-bg-subtle); color: var(--w-info-text-emphasis); }
+            &.status-failed, &.status-expired { background-color: var(--w-danger-bg-subtle); color: var(--w-danger-text-emphasis); }
+        }
+    }
+
+    // Style khi thử thách hết hạn chung
+    &.challenge--expired {
+        opacity: 0.7;
+        .challenge-card__title { text-decoration: line-through; }
+        .challenge-card__actions .btn-custom { display: none; } // Ẩn nút join
+        .challenge-card__actions .status-badge.status-expired { display: inline-block; } // Hiện badge hết hạn
+    }
+     &.challenge--completed {
+         border-left: 4px solid var(--w-success);
+     }
+}

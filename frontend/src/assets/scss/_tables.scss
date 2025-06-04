@@ -1,0 +1,239 @@
+// _tables.scss
+
+.table {
+    --w-table-color-type: initial;
+    --w-table-bg-type: initial;
+    --w-table-color-state: initial;
+    --w-table-bg-state: initial;
+    --w-table-color: var(--w-emphasis-color);
+    --w-table-bg: var(--w-body-bg);
+    --w-table-border-color: var(--w-border-color);
+    --w-table-accent-bg: transparent;
+    --w-table-striped-color: var(--w-emphasis-color);
+    --w-table-striped-bg: rgba(var(--w-emphasis-color-rgb), 0.05);
+    --w-table-active-color: var(--w-emphasis-color);
+    --w-table-active-bg: rgba(var(--w-emphasis-color-rgb), 0.1);
+    --w-table-hover-color: var(--w-emphasis-color);
+    --w-table-hover-bg: rgba(var(--w-emphasis-color-rgb), 0.075);
+    width: 100%;
+    margin-bottom: 1rem;
+    vertical-align: top;
+    border-color: var(--w-table-border-color);
+}
+
+.table> :not(caption)>*>* {
+    padding: 0.5rem 0.5rem;
+    color: var(--w-table-color-state,
+            var(--w-table-color-type, var(--w-table-color)));
+    background-color: var(--w-table-bg);
+    border-bottom-width: var(--w-border-width);
+    box-shadow: inset 0 0 0 9999px var(--w-table-bg-state, var(--w-table-bg-type, var(--w-table-accent-bg)));
+}
+
+.table>tbody {
+    vertical-align: inherit;
+}
+
+.table>thead {
+    vertical-align: bottom;
+}
+
+.table-group-divider {
+    border-top: calc(var(--w-border-width) * 2) solid currentcolor;
+}
+
+.caption-top {
+    caption-side: top;
+}
+
+.table-sm> :not(caption)>*>* {
+    padding: 0.25rem 0.25rem;
+}
+
+.table-bordered> :not(caption)>* {
+    border-width: var(--w-border-width) 0;
+}
+
+.table-bordered> :not(caption)>*>* {
+    border-width: 0 var(--w-border-width);
+}
+
+.table-borderless> :not(caption)>*>* {
+    border-bottom-width: 0;
+}
+
+.table-borderless> :not(:first-child) {
+    border-top-width: 0;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+    --w-table-color-type: var(--w-table-striped-color);
+    --w-table-bg-type: var(--w-table-striped-bg);
+}
+
+.table-striped-columns> :not(caption)>tr> :nth-child(2n) {
+    --w-table-color-type: var(--w-table-striped-color);
+    --w-table-bg-type: var(--w-table-striped-bg);
+}
+
+.table-active {
+    --w-table-color-state: var(--w-table-active-color);
+    --w-table-bg-state: var(--w-table-active-bg);
+}
+
+.table-hover>tbody>tr:hover>* {
+    --w-table-color-state: var(--w-table-hover-color);
+    --w-table-bg-state: var(--w-table-hover-bg);
+}
+
+.table-primary {
+    --w-table-color: #000;
+    --w-table-bg: #cfe2ff;
+    --w-table-border-color: #a6b5cc;
+    --w-table-striped-bg: #c5d7f2;
+    --w-table-striped-color: #000;
+    --w-table-active-bg: #bacbe6;
+    --w-table-active-color: #000;
+    --w-table-hover-bg: #bfd1ec;
+    --w-table-hover-color: #000;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-secondary {
+    --w-table-color: #000;
+    --w-table-bg: #e2e3e5;
+    --w-table-border-color: #b5b6b7;
+    --w-table-striped-bg: #d7d8da;
+    --w-table-striped-color: #000;
+    --w-table-active-bg: #cbccce;
+    --w-table-active-color: #000;
+    --w-table-hover-bg: #d1d2d4;
+    --w-table-hover-color: #000;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-success {
+    --w-table-color: #000;
+    --w-table-bg: #d1e7dd;
+    --w-table-border-color: #a7b9b1;
+    --w-table-striped-bg: #c7dbd2;
+    --w-table-striped-color: #000;
+    --w-table-active-bg: #bcd0c7;
+    --w-table-active-color: #000;
+    --w-table-hover-bg: #c1d6cc;
+    --w-table-hover-color: #000;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-info {
+    --w-table-color: #000;
+    --w-table-bg: #cff4fc;
+    --w-table-border-color: #a6c3ca;
+    --w-table-striped-bg: #c5e8ef;
+    --w-table-striped-color: #000;
+    --w-table-active-bg: #badce3;
+    --w-table-active-color: #000;
+    --w-table-hover-bg: #bfe2e9;
+    --w-table-hover-color: #000;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-warning {
+    --w-table-color: #000;
+    --w-table-bg: #fff3cd;
+    --w-table-border-color: #ccc2a4;
+    --w-table-striped-bg: #f2e7c3;
+    --w-table-striped-color: #000;
+    --w-table-active-bg: #e6dbb9;
+    --w-table-active-color: #000;
+    --w-table-hover-bg: #ece1be;
+    --w-table-hover-color: #000;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-danger {
+    --w-table-color: #000;
+    --w-table-bg: #f8d7da;
+    --w-table-border-color: #c6acae;
+    --w-table-striped-bg: #eccccf;
+    --w-table-striped-color: #000;
+    --w-table-active-bg: #dfc2c4;
+    --w-table-active-color: #000;
+    --w-table-hover-bg: #e5c7ca;
+    --w-table-hover-color: #000;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-light {
+    --w-table-color: #000;
+    --w-table-bg: #f8f9fa;
+    --w-table-border-color: #c6c7c8;
+    --w-table-striped-bg: #ecedee;
+    --w-table-striped-color: #000;
+    --w-table-active-bg: #dfe0e1;
+    --w-table-active-color: #000;
+    --w-table-hover-bg: #e5e6e7;
+    --w-table-hover-color: #000;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-dark {
+    --w-table-color: #fff;
+    --w-table-bg: #212529;
+    --w-table-border-color: #4d5154;
+    --w-table-striped-bg: #2c3034;
+    --w-table-striped-color: #fff;
+    --w-table-active-bg: #373b3e;
+    --w-table-active-color: #fff;
+    --w-table-hover-bg: #323539;
+    --w-table-hover-color: #fff;
+    color: var(--w-table-color);
+    border-color: var(--w-table-border-color);
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 575.98px) {
+    .table-responsive-sm {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .table-responsive-md {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .table-responsive-lg {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .table-responsive-xl {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 1399.98px) {
+    .table-responsive-xxl {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

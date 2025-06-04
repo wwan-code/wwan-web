@@ -1,0 +1,129 @@
+// src/assets/scss/components/profile/_friend-management-section.scss
+// Hoặc trong src/assets/scss/pages/_profile-page.scss
+
+.friend-management-wrapper {
+    // Style chung cho cả wrapper nếu cần
+    .profile-content-section__title { // Nếu dùng chung với ProfileSectionCard
+        // font-size: 1.2rem;
+        // ...
+    }
+}
+
+.friend-list-section {
+    margin-bottom: 1.5rem;
+    background-color: var(--w-body-tertiary-bg); // Nền nhẹ cho mỗi section
+    padding: 1rem;
+    border-radius: var(--w-border-radius-sm);
+    border: 1px solid var(--w-border-color-translucent);
+
+
+    &__title {
+        font-size: 1rem; // Giảm kích thước tiêu đề
+        font-weight: 600;
+        color: var(--w-headings-color);
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--w-border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .count-badge {
+            font-size: 0.75rem;
+            font-weight: normal;
+            color: var(--w-secondary-text-emphasis);
+            background-color: var(--w-body-quaternary-bg, #e0e0e0); // Màu nền khác cho count
+            padding: 0.15em 0.4em;
+            border-radius: var(--w-border-radius-pill);
+        }
+    }
+}
+
+.friend-list-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.friend-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0; // Giảm padding
+    border-bottom: 1px solid var(--w-border-color-translucent);
+    transition: background-color 0.15s ease;
+
+    &:last-child {
+        border-bottom: none;
+    }
+    &:hover {
+        // background-color: rgba(var(--w-primary-rgb), 0.03);
+    }
+
+    .friend-info {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--w-body-color);
+        flex-grow: 1;
+        min-width: 0; // Cho text wrap
+
+        .avatar-frame-wrapper { // UserAvatarDisplay
+            width: 40px !important; // Kích thước avatar nhỏ hơn
+            height: 40px !important;
+            padding: 2px !important;
+            margin-right: 0.75rem;
+        }
+        .friend-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            // Truncate text nếu cần
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &:hover .friend-name {
+            color: var(--w-primary);
+        }
+    }
+
+    .friend-actions {
+        display: flex;
+        gap: 0.35rem; // Khoảng cách giữa các nút action
+        flex-shrink: 0; // Không cho co lại
+
+        .btn-icon { // Nút icon nhỏ
+            background: none;
+            border: 1px solid transparent; // Để có kích thước khi không có background
+            color: var(--w-secondary-color);
+            padding: 0.3rem;
+            font-size: 0.85rem; // Kích thước icon
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: var(--w-body-quaternary-bg, #e9ecef);
+                transform: scale(1.1);
+            }
+            &.btn--sm { font-size: 0.8rem; width: 28px; height: 28px;}
+
+            &.btn--success:hover { color: var(--w-success); }
+            &.btn--warning:hover { color: var(--w-warning); }
+            &.btn--danger-ghost:hover { color: var(--w-danger); background-color: rgba(var(--w-danger-rgb), 0.1); }
+            &.btn--secondary-ghost:hover { color: var(--w-secondary-text-emphasis); background-color: rgba(var(--w-secondary-rgb), 0.1); }
+
+            // Nút Hủy Lời Mời có text
+            span { margin-left: 0.25em; font-size: 0.8em;}
+        }
+    }
+}
+
+.no-content-message.small { // Cho danh sách trống trong friend management
+    font-size: 0.85rem;
+    padding: 0.75rem;
+}

@@ -1,0 +1,159 @@
+// src/assets/scss/pages/_comics-page.scss (Hoặc gộp vào GenreMoviesPage.scss và điều chỉnh)
+
+.comic-list-page { // Class cha cho toàn bộ trang
+    padding-top: var(--w-spacer-lg);
+    padding-bottom: var(--w-spacer-xl);
+
+    // Tái sử dụng layout 2 cột nếu bạn đã có (ví dụ từ GenreMoviesPage.scss)
+    .row-custom {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px; // (Giống Bootstrap grid gutter)
+        margin-left: -15px;
+    }
+    .main-content-col { // Cột chính chứa danh sách truyện
+        width: 75%; // Hoặc dùng flex-grow
+        padding-right: 15px;
+        padding-left: 15px;
+        order: 2; // Mặc định
+        @media (max-width: 991.98px) { width: 100%; order: 1;} // Stack trên mobile
+    }
+    .sidebar-col { // Cột chứa bộ lọc
+        width: 25%;
+        padding-right: 15px;
+        padding-left: 15px;
+        order: 1;
+         @media (max-width: 991.98px) { width: 100%; order: 2; margin-bottom: var(--w-spacer-lg);}
+    }
+
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--w-spacer-md);
+        padding-bottom: var(--w-spacer-sm);
+        border-bottom: 1px solid var(--w-border-color);
+
+        .section-title {
+            font-size: var(--w-h3-font-size);
+            font-weight: var(--w-heading-font-weight);
+            color: var(--w-heading-color);
+            margin-bottom: 0;
+            .icon-before { margin-right: 0.5em; color: var(--w-primary); }
+            .search-query-display {
+                font-size: 0.9em;
+                color: var(--w-secondary-color);
+                font-weight: var(--w-body-font-weight);
+            }
+        }
+        .search-results-count {
+            font-size: 0.85rem;
+            color: var(--w-secondary-color);
+        }
+    }
+
+    .card-grid.comic-grid { // Container cho các card truyện
+        display: grid;
+        gap: var(--w-spacer-md); // Khoảng cách giữa các card
+        // Số cột responsive
+        grid-template-columns: repeat(2, 1fr); // 2 cột trên mobile nhỏ nhất
+        @media (min-width: 576px) { grid-template-columns: repeat(3, 1fr); }
+        @media (min-width: 768px) { grid-template-columns: repeat(3, 1fr); } // Giữ 3 cột cho tablet
+        @media (min-width: 992px) { grid-template-columns: repeat(4, 1fr); } // 4 cột trên desktop nhỏ
+        @media (min-width: 1200px) { grid-template-columns: repeat(5, 1fr); } // 5 cột trên desktop lớn
+        @media (min-width: 1400px) { grid-template-columns: repeat(6, 1fr); } // 6 cột trên desktop rất lớn
+    }
+
+    .full-page-loader, .no-results-found, .alert-custom {
+        min-height: 300px; // Để có không gian khi loading hoặc không có kết quả
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: var(--w-spacer-lg);
+        border-radius: var(--w-border-radius-lg);
+    }
+    .full-page-loader .spinner-eff { /* Style spinner đã có */ }
+
+    .no-results-found {
+        color: var(--w-secondary-color);
+        .icon-no-results {
+            font-size: 3rem;
+            margin-bottom: var(--w-spacer-sm);
+            opacity: 0.5;
+        }
+        p { margin-bottom: var(--w-spacer-md); font-size: 1.1rem; }
+        .btn-custom { /* Style cho nút đã có */ }
+    }
+
+    // Sidebar Filter
+    .filter-sidebar {
+        background-color: var(--w-paper-bg);
+        padding: var(--w-spacer-md);
+        border-radius: var(--w-border-radius-lg);
+        box-shadow: var(--w-box-shadow-sm);
+
+        &.sticky-filter {
+            position: sticky;
+            top: calc(var(--w-header-height) + var(--w-spacer-md));
+            overflow-y: auto;
+        }
+
+        &__title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--w-emphasis-color);
+            padding-bottom: var(--w-spacer-sm);
+            margin-bottom: var(--w-spacer-md);
+            border-bottom: 1px solid var(--w-border-color);
+            .icon-before { margin-right: 0.5em; color: var(--w-primary); }
+        }
+    }
+}
+
+// Style cho Pagination tùy chỉnh (nếu bạn đã có file _pagination.scss thì import vào đây)
+// Hoặc định nghĩa trực tiếp
+.pagination-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--w-spacer-lg);
+    padding-left: 0;
+    list-style: none;
+
+    .pagination__button {
+        color: var(--w-primary);
+        background-color: var(--w-paper-bg);
+        border: 1px solid var(--w-border-color);
+        padding: 0.5rem 0.9rem;
+        margin: 0 3px;
+        border-radius: var(--w-border-radius-sm);
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+        font-size: 0.875rem;
+        line-height: 1.2; // Đảm bảo số và icon thẳng hàng
+
+        &:hover:not(:disabled) {
+            background-color: var(--w-primary-bg-subtle);
+            border-color: var(--w-primary-border-subtle);
+            color: var(--w-primary-text-emphasis);
+        }
+        &.active {
+            background-color: var(--w-primary);
+            border-color: var(--w-primary);
+            color: var(--w-primary-contrast);
+            z-index: 2; // Nổi lên trên
+            font-weight: 500;
+        }
+        &:disabled {
+            color: var(--w-secondary-color);
+            background-color: var(--w-tertiary-bg-subtle);
+            border-color: var(--w-border-color);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+         // Style cho nút first, prev, next, last
+        &:first-child, &:last-child { font-weight: 600; }
+        &:nth-child(2), &:nth-last-child(2) { font-weight: 500; } // Nút prev/next
+    }
+}
