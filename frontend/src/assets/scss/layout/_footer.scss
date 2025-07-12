@@ -1,0 +1,154 @@
+.footer {
+    background-color: var(--w-body-tertiary-bg);
+    color: var(--w-secondary-color);
+    padding: var(--w-spacer-xxl) 0 var(--w-spacer-lg) 0;
+    font-size: var(--w-body-font-size);
+    background: url('/footer.png') no-repeat center center / cover;
+    position: relative;
+
+    &::before {
+        position: absolute;
+        background: var(--w-body-bg);
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        opacity: 0.9;
+    }
+
+    &__container {
+        max-width: var(--w-breakpoint-xl);
+        margin: 0 auto;
+        padding: 0 var(--w-spacer-lg);
+        position: relative;
+        z-index: 1;
+    }
+
+    // --- Phần đầu (Top Section) ---
+    &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--w-spacer-xl);
+        margin-bottom: var(--w-spacer-xxl);
+    }
+
+    &__identity {
+        max-width: 600px;
+    }
+
+    &__logo {
+        display: inline-block;
+        margin-bottom: var(--w-spacer);
+        img {
+            max-height: 40px; // Điều chỉnh kích thước logo
+        }
+    }
+
+    &__about {
+        margin: 0;
+        line-height: var(--w-body-line-height);
+    }
+
+    &__social {
+        display: flex;
+        gap: var(--w-spacer-lg); // Khoảng cách giữa các icon
+    }
+
+    &__social-link {
+        color: var(--w-tertiary-color); // Màu icon mặc định
+        transition: color 0.3s ease, transform 0.3s ease;
+
+        &:hover {
+            color: var(--w-primary); // Màu chính khi hover
+            transform: scale(1.1);
+        }
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    // --- Phần chính (Main Links Section) ---
+    &__main {
+        display: grid;
+        grid-template-columns: 1fr; // Mặc định 1 cột trên mobile
+        gap: var(--w-spacer-xl);
+        text-align: center;
+    }
+
+    &__links-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--w-emphasis-color); // Màu chữ nhấn mạnh cho tiêu đề
+        margin-bottom: var(--w-spacer-md);
+    }
+
+    &__links-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--w-spacer-xs); // Khoảng cách giữa các link
+    }
+
+    &__links-link {
+        color: var(--w-secondary-color); // Màu link mặc định
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--w-link-hover-color); // Sử dụng biến màu hover của link
+            text-decoration: underline;
+        }
+    }
+
+    // --- Phân cách và Phần cuối (Divider & Bottom Section) ---
+    &__divider {
+        border: 0;
+        border-top: var(--w-border-width) var(--w-border-style) var(--w-border-color-translucent);
+        margin: var(--w-spacer-xxl) 0 var(--w-spacer-lg) 0;
+    }
+    
+    &__bottom {
+        text-align: center;
+    }
+
+    &__copyright {
+        margin: 0;
+        font-size: 0.875rem;
+        color: var(--w-tertiary-color); // Màu chữ nhạt hơn cho copyright
+    }
+
+    // --- Responsive Design ---
+
+    // Tablet và lớn hơn
+    @media (min-width: 768px) {
+        &__top {
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        &__main {
+            grid-template-columns: repeat(3, 1fr); // 3 cột cho tablet
+            text-align: left;
+        }
+
+        &__links-list {
+            align-items: flex-start; // Căn lề trái các link
+        }
+    }
+
+    // Desktop và lớn hơn
+    @media (min-width: 992px) {
+        &__top {
+             align-items: center;
+        }
+    }
+}

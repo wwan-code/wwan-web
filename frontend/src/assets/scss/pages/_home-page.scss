@@ -1,0 +1,281 @@
+
+:root {
+    --w-skeleton-base-color: #eef0f2; // Màu cho theme sáng
+    --w-skeleton-highlight-color: #f8f9fa; // Màu cho theme sáng
+
+    &[data-ww-theme="dark"] {
+        --w-skeleton-base-color: #373c42;
+        --w-skeleton-highlight-color: #454b52;
+    }
+}
+
+// // Animation cho skeleton
+@keyframes skeleton-pulse {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+// Class chung cho các element placeholder trong skeleton
+.placeholder {
+    display: inline-block;
+    height: 1em; // Chiều cao mặc định
+    background-color: var(--w-skeleton-base-color);
+    border-radius: 0.25rem; // Bo góc nhẹ
+    animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    opacity: 0.7;
+    user-select: none;
+}
+
+// Style cho Skeleton Loader của Sidebar
+.film-sidebar__section {
+    .film-sidebar__title.placeholder-title {
+        height: 24px;
+        width: 70%;
+        margin-bottom: 1rem;
+        background-color: var(--w-skeleton-base-color);
+        border-radius: var(--w-border-radius-sm, 0.25rem);
+        animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
+
+.skeleton-sidebar-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0; // Tương tự padding của item thật
+    border-bottom: 1px solid var(--w-border-color-translucent); // Đường kẻ mờ
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    .skeleton-sidebar-title {
+        height: 18px; // Chiều cao của dòng tên phim
+        width: 80%;   // Chiều rộng ví dụ
+        margin-bottom: 0.35rem;
+    }
+
+    .skeleton-sidebar-meta {
+        height: 14px; // Chiều cao của dòng thông tin phụ (tập phim)
+        width: 50%;   // Chiều rộng ví dụ
+    }
+}
+
+.skeleton-card {
+    border-radius: var(--w-border-radius-lg, 0.5rem);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    &.comic-card {
+        .skeleton-image {
+            padding-top: 150%;
+        }
+    }
+    .skeleton-image {
+        width: 100%;
+        padding-top: 56.25%; // Duy trì tỷ lệ khung hình (ví dụ 2:3 => 150%, 16:9 => 56.25%)
+        background-color: var(--w-skeleton-base-color);
+        animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .skeleton-title {
+        height: 20px;
+        margin: 10px 10px 5px 10px;
+        background-color: var(--w-skeleton-base-color);
+        animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        border-radius: 4px;
+    }
+    .skeleton-meta {
+        height: 15px;
+        margin: 0 10px 10px 10px;
+        background-color: var(--w-skeleton-base-color);
+        animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        border-radius: 4px;
+        width: 60%;
+    }
+}
+
+/*
+================================
+Refactored Film Area
+================================
+*/
+.film-area {
+    padding: var(--w-spacer-xl) 0;
+
+    &__container {
+        margin: 0 auto;
+        padding: 0 var(--w-spacer-md);
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--w-spacer-lg);
+
+        @media (min-width: 992px) {
+            grid-template-columns: 1fr 320px;
+            gap: var(--w-spacer-lg);
+        }
+        @media (min-width: 1200px) {
+            grid-template-columns: 1fr 360px;
+            gap: var(--w-spacer-xl);
+        }
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        min-width: 0; 
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--w-spacer-sm) var(--w-spacer-md);
+        padding-bottom: var(--w-spacer-md);
+        border-bottom: 1px solid var(--w-border-color-translucent);
+        margin-bottom: var(--w-spacer-md);
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--w-heading-color);
+        margin: 0;
+        i {
+            color: var(--w-primary);
+        }
+    }
+
+    &__filters {
+        display: flex;
+        gap: var(--w-spacer-xs);
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__filter-item {
+        padding: 0.35rem 0.85rem;
+        border-radius: var(--w-border-radius-pill);
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--w-secondary-color);
+        transition: all 0.2s ease-in-out;
+        user-select: none;
+
+        &:hover {
+            color: var(--w-primary-text-emphasis);
+            background-color: var(--w-secondary-bg);
+        }
+
+        &--active {
+            background-color: var(--w-primary);
+            color: var(--w-white) !important;
+            font-weight: 600;
+        }
+
+        &[aria-disabled="true"] {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--w-spacer-md);
+
+        @media (min-width: 576px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @media (min-width: 992px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    &__list-item {
+       .skeleton-card {
+           height: 100%;
+       }
+    }
+}
+
+.sidebar-section {
+    background-color: var(--w-paper-bg);
+    border-radius: var(--w-border-radius-lg);
+    padding: var(--w-spacer-md);
+    box-shadow: var(--w-card-box-shadow);
+    
+    &__title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--w-heading-color);
+        margin-bottom: var(--w-spacer-md);
+        padding-bottom: var(--w-spacer-sm);
+        border-bottom: 1px solid var(--w-border-color-translucent);
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--w-spacer-xs);
+    }
+
+    &__link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: var(--w-spacer-sm);
+        text-decoration: none;
+        color: var(--w-body-color);
+        padding: var(--w-spacer-xs);
+        border-radius: var(--w-border-radius-sm);
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            background-color: var(--w-tertiary-bg);
+            .sidebar-section__name {
+                color: var(--w-primary-text-emphasis);
+            }
+        }
+    }
+
+    &__name {
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex-grow: 1;
+        transition: color 0.2s ease;
+    }
+    
+    &__episode {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--w-secondary-color);
+        background-color: var(--w-secondary-bg);
+        padding: 3px 8px;
+        border-radius: var(--w-border-radius-sm);
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+}
+
+.film-area__list-item .single-film.manga-style {
+    height: 100%;
+}

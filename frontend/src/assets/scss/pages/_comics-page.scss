@@ -1,0 +1,578 @@
+// Manga/Manhwa/Manhua Style Comics Page
+.manga-page {
+    min-height: 100vh;
+    background: var(--w-body-bg);
+    color: var(--w-body-color);
+    position: relative;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 180px;
+        background: radial-gradient(
+            ellipse at top,
+            rgba(var(--w-primary-rgb), 0.05),
+            transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+    }
+}
+
+.manga-page__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--w-spacer-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.manga-page__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--w-spacer-lg);
+    padding: var(--w-spacer-xl) 0;
+    margin-bottom: var(--w-spacer-xl);
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(var(--w-primary-rgb), 0.3), 
+            rgba(var(--w-secondary-rgb), 0.5), 
+            rgba(var(--w-primary-rgb), 0.3), 
+            transparent);
+    }
+}
+
+.manga-page__title-section {
+    flex: 1;
+}
+
+.manga-page__title {
+    display: flex;
+    align-items: center;
+    gap: var(--w-spacer-sm);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--w-emphasis-color);
+    margin-bottom: var(--w-spacer-xs);
+    line-height: 1.2;
+    position: relative;
+
+    i {
+        color: var(--w-primary);
+        font-size: 0.9em;
+        filter: drop-shadow(0 0 5px rgba(var(--w-primary-rgb), 0.5));
+    }
+
+    span {
+        background: linear-gradient(135deg, var(--w-primary), var(--w-secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        position: relative;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                rgba(var(--w-primary-rgb), 0.2), 
+                rgba(var(--w-secondary-rgb), 0.5),
+                rgba(var(--w-primary-rgb), 0.2));
+            border-radius: var(--w-border-radius);
+            opacity: 0.6;
+        }
+    }
+}
+
+.manga-page__search-query {
+    color: var(--w-secondary-color);
+    font-weight: 600;
+    font-style: italic;
+    display: inline-block;
+    padding: 2px 8px;
+    background: rgba(var(--w-primary-rgb), 0.1);
+    border-radius: var(--w-border-radius);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 0 1px rgba(var(--w-primary-rgb), 0.1);
+}
+
+.manga-page__subtitle {
+    font-size: 1.1rem;
+    color: var(--w-secondary-color);
+    margin: 0;
+    
+    strong {
+        color: var(--w-primary);
+        font-weight: 700;
+        text-shadow: 0 0 10px rgba(var(--w-primary-rgb), 0.3);
+    }
+}
+
+.manga-page__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--w-spacer-lg);
+    flex-shrink: 0;
+}
+
+.manga-page__sort-info {
+    display: flex;
+    align-items: center;
+    gap: var(--w-spacer-xs);
+    padding: var(--w-spacer-sm) var(--w-spacer-md);
+    background: var(--w-tertiary-bg);
+    border-radius: var(--w-border-radius-lg);
+    font-size: 0.9rem;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 12px rgba(var(--w-black-rgb), 0.05),
+                0 0 0 1px rgba(var(--w-primary-rgb), 0.08);
+    transition: all 0.3s ease;
+    
+    &:hover {
+        box-shadow: 0 4px 12px rgba(var(--w-primary-rgb), 0.1),
+                    0 0 0 1px rgba(var(--w-primary-rgb), 0.15);
+    }
+}
+
+.manga-page__sort-label {
+    color: var(--w-secondary-color);
+    font-weight: 500;
+}
+
+.manga-page__sort-value {
+    color: var(--w-emphasis-color);
+    font-weight: 600;
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--w-primary);
+        opacity: 0.5;
+    }
+}
+
+.manga-filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--w-spacer-xs);
+    padding: var(--w-spacer-sm) var(--w-spacer-md);
+    background: var(--w-primary);
+    color: var(--w-white);
+    border: none;
+    border-radius: var(--w-border-radius-lg);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(var(--w-primary-rgb), 0.25),
+                0 0 0 1px rgba(var(--w-primary-rgb), 0.1);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+            circle at center,
+            rgba(var(--w-white-rgb), 0.1) 0%,
+            transparent 60%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+        background: var(--w-secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(var(--w-primary-rgb), 0.3),
+                    0 0 0 1px rgba(var(--w-primary-rgb), 0.2);
+                    
+        &::before {
+            opacity: 1;
+            animation: manga-filter-glow 2s ease-in-out infinite;
+        }
+    }
+
+    &--active {
+        background: linear-gradient(135deg, var(--w-primary), var(--w-secondary));
+        animation: manga-filter-pulse 2s ease-in-out infinite;
+    }
+
+    i {
+        font-size: 1rem;
+        filter: drop-shadow(0 0 3px rgba(var(--w-white-rgb), 0.5));
+    }
+}
+
+@keyframes manga-filter-glow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+}
+
+.manga-filter-toggle__badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: linear-gradient(135deg, #FF6B6B, #EE5A52);
+    color: var(--w-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 50%;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.4),
+                0 0 0 1px rgba(255, 107, 107, 0.2);
+    animation: manga-badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes manga-badge-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+@keyframes manga-filter-pulse {
+    0%, 100% { box-shadow: 0 4px 15px rgba(var(--w-primary-rgb), 0.3); }
+    50% { box-shadow: 0 8px 25px rgba(var(--w-primary-rgb), 0.5); }
+}
+
+.manga-page__content {
+    min-height: 400px;
+    position: relative;
+}
+
+.manga-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--w-spacer-lg);
+    margin-bottom: var(--w-spacer-xl);
+    position: relative;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(var(--w-primary-rgb), 0.2), 
+            rgba(var(--w-secondary-rgb), 0.3), 
+            rgba(var(--w-primary-rgb), 0.2), 
+            transparent);
+    }
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--w-spacer-xl);
+    }
+
+    @media (min-width: 1200px) {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
+.manga-loading,
+.manga-loading-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--w-spacer-xxl) var(--w-spacer-lg);
+    text-align: center;
+
+    p {
+        margin-top: var(--w-spacer-md);
+        color: var(--w-secondary-color);
+        font-size: 1.1rem;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+    }
+}
+
+.manga-loading {
+    min-height: 300px;
+}
+
+.manga-loading__spinner {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(var(--w-primary-rgb), 0.1);
+    border-top: 2px solid var(--w-primary);
+    border-right: 2px solid var(--w-secondary);
+    border-radius: 50%;
+    animation: manga-spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+    box-shadow: 0 0 15px rgba(var(--w-primary-rgb), 0.2);
+    position: relative;
+    
+    &::before, &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 2px solid transparent;
+    }
+    
+    &::before {
+        border-top: 2px solid rgba(var(--w-primary-rgb), 0.5);
+        animation: manga-spin 3s linear infinite;
+    }
+    
+    &::after {
+        border-bottom: 2px solid rgba(var(--w-secondary-rgb), 0.5);
+        animation: manga-spin 1.5s ease-in-out infinite reverse;
+    }
+}
+
+@keyframes manga-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.manga-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--w-spacer-xxl) var(--w-spacer-lg);
+    text-align: center;
+    color: var(--w-danger);
+    min-height: 300px;
+    backdrop-filter: blur(5px);
+    background: rgba(var(--w-danger-rgb), 0.03);
+    border-radius: var(--w-border-radius-xl);
+    box-shadow: 0 8px 20px rgba(var(--w-danger-rgb), 0.1),
+                0 0 0 1px rgba(var(--w-danger-rgb), 0.1);
+
+    i {
+        font-size: 3rem;
+        margin-bottom: var(--w-spacer-md);
+        opacity: 0.7;
+        animation: manga-error-pulse 3s ease-in-out infinite;
+        filter: drop-shadow(0 0 10px rgba(var(--w-danger-rgb), 0.3));
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin: 0;
+        line-height: 1.5;
+        max-width: 500px;
+    }
+}
+
+@keyframes manga-error-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 0.9; }
+}
+
+.manga-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--w-spacer-xxl) var(--w-spacer-lg);
+    text-align: center;
+    min-height: 400px;
+}
+
+.manga-empty__icon {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--w-primary), var(--w-secondary));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--w-spacer-lg);
+    opacity: 0.8;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(var(--w-primary-rgb), 0.3),
+                0 0 0 2px rgba(var(--w-primary-rgb), 0.2);
+    overflow: hidden;
+    animation: manga-empty-float 6s ease-in-out infinite;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: radial-gradient(
+            circle at 30% 30%,
+            rgba(var(--w-white-rgb), 0.3),
+            transparent 60%
+        );
+    }
+    
+    &::after {
+        content: '';
+        position: absolute;
+        inset: -20%;
+        border-radius: 50%;
+        border: 2px dashed rgba(var(--w-white-rgb), 0.3);
+        animation: manga-empty-rotate 10s linear infinite;
+    }
+
+    i {
+        font-size: 3rem;
+        color: var(--w-white);
+        filter: drop-shadow(0 0 10px rgba(var(--w-white-rgb), 0.5));
+        position: relative;
+        z-index: 1;
+    }
+}
+
+@keyframes manga-empty-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes manga-empty-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.manga-empty h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--w-emphasis-color);
+    margin-bottom: var(--w-spacer-sm);
+    position: relative;
+    display: inline-block;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            var(--w-primary),
+            var(--w-secondary),
+            transparent);
+    }
+}
+
+.manga-empty p {
+    font-size: 1.1rem;
+    color: var(--w-secondary-color);
+    margin: 0;
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .manga-page__container {
+        padding: 0 var(--w-spacer-md);
+    }
+
+    .manga-page__header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--w-spacer-md);
+        padding: var(--w-spacer-lg) 0;
+    }
+
+    .manga-page__controls {
+        justify-content: space-between;
+        gap: var(--w-spacer-md);
+    }
+
+    .manga-page__sort-info {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .manga-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--w-spacer-md);
+    }
+
+    .manga-page__title {
+        font-size: 1.8rem;
+        
+        span {
+            display: block;
+            margin-top: var(--w-spacer-xs);
+        }
+    }
+    
+    .manga-empty__icon {
+        width: 100px;
+        height: 100px;
+        
+        i {
+            font-size: 2.5rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .manga-page__container {
+        padding: 0 var(--w-spacer-sm);
+    }
+
+    .manga-page__controls {
+        flex-direction: column;
+        gap: var(--w-spacer-sm);
+    }
+
+    .manga-page__sort-info,
+    .manga-filter-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .manga-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--w-spacer-sm);
+    }
+
+    .manga-empty__icon {
+        width: 80px;
+        height: 80px;
+        
+        i {
+            font-size: 2rem;
+        }
+    }
+
+    .manga-empty h3 {
+        font-size: 1.3rem;
+    }
+
+    .manga-empty p {
+        font-size: 1rem;
+    }
+}

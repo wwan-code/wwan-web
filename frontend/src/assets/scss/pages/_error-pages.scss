@@ -1,0 +1,169 @@
+// frontend/src/assets/scss/pages/_error-pages.scss
+
+@use "sass:map";
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;
+
+
+// Mixin này được giữ lại để đảm bảo component hoạt động độc lập,
+// bạn có thể thay thế bằng mixin chung của dự án nếu có.
+@mixin respond-to($breakpoint) {
+  $value: map.get($grid-breakpoints, $breakpoint);
+
+  @if $value {
+    @media (min-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' không tồn tại trong map $grid-breakpoints.";
+  }
+}
+
+// --- Keyframes (Giữ nguyên) ---
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+// --- Main Styles ---
+.error-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    // Sử dụng biến từ _variables.scss
+    background: var(--w-body-bg);
+    color: var(--w-body-color);
+    padding: 2rem;
+    overflow: hidden;
+    font-family: var(--w-font-sans-serif);
+}
+
+.error-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    animation: fadeIn 1s ease-out;
+
+    @include respond-to(lg) {
+        flex-direction: row;
+        text-align: left;
+        gap: 4rem;
+    }
+}
+
+.error-image-container {
+    flex: 1;
+    max-width: 500px;
+    animation: float 6s ease-in-out infinite;
+
+    .error-image {
+        width: 100%;
+        height: auto;
+        border-radius: var(--w-border-radius-lg); // Sử dụng biến border-radius
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.error-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.error-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--w-primary); // Sử dụng biến màu chính
+    text-shadow: 0 2px 10px rgba(var(--w-primary-rgb), 0.3);
+
+    @include respond-to(lg) {
+        font-size: 4rem;
+    }
+}
+
+.error-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--w-secondary-color); // Sử dụng biến màu thứ cấp
+    max-width: 500px;
+    margin: 0 auto;
+
+    @include respond-to(lg) {
+        margin: 0;
+    }
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    @include respond-to(lg) {
+        justify-content: flex-start;
+    }
+}
+
+.error-button {
+    padding: 0.8rem 1.8rem;
+    border-radius: var(--w-border-radius); // Sử dụng biến border-radius
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+
+    &.primary {
+        background-color: var(--w-primary);
+        color: white;
+        box-shadow: 0 4px 15px rgba(var(--w-primary-rgb), 0.2);
+
+        &:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(var(--w-primary-rgb), 0.3);
+        }
+    }
+
+    &.secondary {
+        background-color: var(--w-tertiary-bg);
+        color: var(--w-body-color);
+        border: 1px solid var(--w-border-color);
+
+        &:hover {
+            background-color: var(--w-tertiary-hover-bg); // Giả sử có biến này, hoặc dùng màu khác
+            border-color: var(--w-border-color-translucent);
+        }
+    }
+}

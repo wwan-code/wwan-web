@@ -1,0 +1,374 @@
+// Manga/Manhwa/Manhua Style Filter Modal
+.manga-filter-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--w-black-rgb), 0.7);
+    backdrop-filter: blur(8px);
+    z-index: var(--w-modal-zindex);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--w-spacer-lg);
+    animation: manga-modal-fade-in 0.3s ease-out;
+}
+
+@keyframes manga-modal-fade-in {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(8px);
+    }
+}
+
+.manga-filter-modal {
+    background: var(--w-modal-bg);
+    border-radius: var(--w-border-radius-xl);
+    box-shadow: 0 20px 60px rgba(var(--w-black-rgb), 0.3);
+    border: 1px solid var(--w-border-color);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: hidden;
+    animation: manga-modal-slide-up 0.3s ease-out;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--w-primary), var(--w-secondary), var(--w-primary));
+        animation: manga-modal-gradient 3s ease-in-out infinite;
+    }
+}
+
+@keyframes manga-modal-slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes manga-modal-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.manga-filter-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--w-spacer-lg) var(--w-spacer-xl);
+    border-bottom: 2px solid var(--w-border-color);
+    background: var(--w-tertiary-bg);
+}
+
+.manga-filter-modal__title {
+    display: flex;
+    align-items: center;
+    gap: var(--w-spacer-sm);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--w-emphasis-color);
+    margin: 0;
+
+    i {
+        color: var(--w-primary);
+        font-size: 1.2rem;
+    }
+}
+
+.manga-filter-modal__close {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: var(--w-secondary-bg);
+    color: var(--w-secondary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+
+    &:hover {
+        background: var(--w-danger);
+        color: var(--w-white);
+        transform: scale(1.1);
+    }
+}
+
+.manga-filter-modal__body {
+    padding: var(--w-spacer-xl);
+    max-height: 60vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--w-tertiary-bg);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--w-primary);
+        border-radius: 4px;
+        
+        &:hover {
+            background: var(--w-secondary);
+        }
+    }
+}
+
+.manga-filter-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--w-spacer-xxl);
+    text-align: center;
+
+    p {
+        margin-top: var(--w-spacer-md);
+        color: var(--w-secondary-color);
+        font-size: 1.1rem;
+    }
+}
+
+.manga-filter-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--w-spacer-lg);
+
+    @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.manga-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--w-spacer-sm);
+}
+
+.manga-filter-group__label {
+    display: flex;
+    align-items: center;
+    gap: var(--w-spacer-xs);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--w-emphasis-color);
+
+    i {
+        color: var(--w-primary);
+        font-size: 0.9rem;
+        width: 16px;
+        text-align: center;
+    }
+}
+
+.manga-filter-select {
+    padding: var(--w-spacer-sm) var(--w-spacer-md);
+    border: 2px solid var(--w-border-color);
+    border-radius: var(--w-border-radius-lg);
+    background: var(--w-body-bg);
+    color: var(--w-body-color);
+    font-size: 1rem;
+    font-family: var(--w-font-sans-serif);
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+        border-color: var(--w-primary);
+        box-shadow: 0 0 0 3px rgba(var(--w-primary-rgb), 0.1);
+        background: var(--w-paper-bg);
+    }
+
+    &:hover {
+        border-color: var(--w-secondary);
+    }
+
+    option {
+        padding: var(--w-spacer-xs);
+        background: var(--w-paper-bg);
+        color: var(--w-body-color);
+    }
+}
+
+.manga-filter-modal__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--w-spacer-lg) var(--w-spacer-xl);
+    border-top: 2px solid var(--w-border-color);
+    background: var(--w-tertiary-bg);
+}
+
+.manga-filter-modal__info {
+    flex: 1;
+}
+
+.manga-filter-count {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--w-spacer-xs);
+    padding: var(--w-spacer-xs) var(--w-spacer-sm);
+    background: var(--w-primary-bg-subtle);
+    color: var(--w-primary);
+    border-radius: var(--w-border-radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    &::before {
+        content: '●';
+        font-size: 0.8rem;
+    }
+}
+
+.manga-filter-modal__actions {
+    display: flex;
+    gap: var(--w-spacer-md);
+}
+
+.manga-filter-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--w-spacer-xs);
+    padding: var(--w-spacer-sm) var(--w-spacer-lg);
+    border: none;
+    border-radius: var(--w-border-radius-lg);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    justify-content: center;
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+
+    i {
+        font-size: 0.9rem;
+    }
+
+    &--reset {
+        background: var(--w-secondary-bg);
+        color: var(--w-secondary-color);
+        border: 1px solid var(--w-border-color);
+
+        &:hover:not(:disabled) {
+            background: var(--w-warning);
+            color: var(--w-white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(var(--w-warning-rgb), 0.3);
+        }
+    }
+
+    &--apply {
+        background: linear-gradient(135deg, var(--w-primary), var(--w-secondary));
+        color: var(--w-white);
+        box-shadow: 0 4px 12px rgba(var(--w-primary-rgb), 0.3);
+
+        &:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--w-secondary), var(--w-primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(var(--w-primary-rgb), 0.4);
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .manga-filter-modal-overlay {
+        padding: var(--w-spacer-md);
+        align-items: flex-end;
+    }
+
+    .manga-filter-modal {
+        max-width: none;
+        width: 100%;
+        max-height: 85vh;
+        border-radius: var(--w-border-radius-xl) var(--w-border-radius-xl) 0 0;
+    }
+
+    .manga-filter-modal__header,
+    .manga-filter-modal__footer {
+        padding: var(--w-spacer-md) var(--w-spacer-lg);
+    }
+
+    .manga-filter-modal__body {
+        padding: var(--w-spacer-lg);
+    }
+
+    .manga-filter-grid {
+        grid-template-columns: 1fr;
+        gap: var(--w-spacer-md);
+    }
+
+    .manga-filter-modal__footer {
+        flex-direction: column;
+        gap: var(--w-spacer-md);
+        align-items: stretch;
+    }
+
+    .manga-filter-modal__actions {
+        width: 100%;
+        
+        .manga-filter-btn {
+            flex: 1;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .manga-filter-modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .manga-filter-modal {
+        border-radius: var(--w-border-radius-lg) var(--w-border-radius-lg) 0 0;
+        max-height: 90vh;
+    }
+
+    .manga-filter-modal__header {
+        padding: var(--w-spacer-md);
+    }
+
+    .manga-filter-modal__title {
+        font-size: 1.2rem;
+    }
+
+    .manga-filter-modal__body {
+        padding: var(--w-spacer-md);
+    }
+
+    .manga-filter-modal__footer {
+        padding: var(--w-spacer-md);
+    }
+
+    .manga-filter-btn {
+        padding: var(--w-spacer-sm) var(--w-spacer-md);
+        font-size: 0.9rem;
+        min-width: auto;
+    }
+}

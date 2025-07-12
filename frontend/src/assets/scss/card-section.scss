@@ -1,0 +1,171 @@
+.page-section {
+    margin-top: calc(var(--w-header-height) + 34px);
+}
+
+.page-section__title {
+    margin-bottom: 4px;
+    h3.page-section__title-text {
+        font-size: 2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        i {
+            margin-right: 0.75rem;
+            color: var(--w-primary);
+        }
+    }
+}
+
+.card-section {
+    .section-title {
+        margin-bottom: 4px;
+        height: 38px;
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            i { // Icon trước tiêu đề (ví dụ)
+                margin-right: 0.75rem;
+                color: var(--w-primary); // Sử dụng màu chủ đạo
+            }
+        }
+        .btn-view-more {
+            font-size: 0.9rem;
+            color: var(--w-primary);
+            text-decoration: none;
+            font-weight: 500;
+            i {
+                font-size: 0.75rem;
+            }
+            &:hover {
+                text-decoration: underline;
+                color: var(--w-primary-dark); // Màu đậm hơn khi hover
+            }
+        }
+    }
+    
+    .section-title__text {
+        line-height: 38px
+    }
+    .section-list {
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-auto-rows: 0;
+        overflow: visible;
+
+        &__multi {
+            grid-auto-rows: auto;
+        }
+
+        &__item {
+            margin-bottom: 16px;
+        }
+    }
+    &:not(.card-section--mobile) .section-title{
+        margin-bottom: 16px;
+    }
+    &:not(.card-section--mobile):not(.card-section--single) {
+        margin-bottom: 48px;
+    }
+    &.section-layout-scrollable-row {
+        .scrollable-row-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 15px;
+            margin-bottom: -15px;
+
+            &::-webkit-scrollbar {
+                height: 8px;
+            }
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(var(--w-primary-rgb), 0.6);
+                border-radius: 10px;
+                border: 2px solid transparent;
+                background-clip: content-box;
+            }
+            &:hover::-webkit-scrollbar-thumb {
+                background-color: rgba(var(--w-primary-rgb), 0.8);
+            }
+        }
+
+        .scrollable-row-content {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 1rem;
+        }
+
+        .film-card-scroll-item, .comic-card-scroll-item {
+            flex: 0 0 auto;
+            width: 220px;
+        }
+        .comic-card-scroll-item {
+            width: 180px;
+        }
+
+        .single-film, .comic-card {
+             height: 100%;
+             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+             &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(var(--w-primary-rgb), 0.15), 0 4px 8px rgba(0,0,0,0.1);
+             }
+        }
+    }
+}
+
+.card-section--mobile {
+    margin: 0 16px 24px
+}
+.section__list--row:not(.card-section--mobile--single) {
+    grid-template-columns: repeat(2,1fr);
+    grid-column-gap: 8px
+}
+
+.card-section--mobile.card-section--single {
+    margin: 0 0 24px
+}
+
+.card-section--mobile.card-section--single .section-title {
+    margin: 0 16px
+}
+@media (max-width: 412px) {
+    .card-section:not(.card-section--mobile) .section-list:not(.section-list__single) {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767.5px) {
+    .card-section .section-list:not(.section-list__single) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 8px
+    }
+}
+
+@media (min-width: 768px) {
+    .card-section:not(.card-section--mobile) .section-list:not(.section-list__single) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 16px
+    }
+}
+
+@media (min-width: 992px) {
+    .card-section:not(.card-section--mobile) .section-list:not(.section-list__single) {
+        grid-template-columns: repeat(4, 1fr)
+    }
+}
+
+@media (min-width: 1280px) {
+    .card-section:not(.card-section--mobile) .section-list:not(.section-list__single) {
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 24px
+    }
+
+    .card-section:not(.card-section--mobile) .section-list:not(.section-list--single) .section-list__item {
+        margin-bottom: 24px
+    }
+}

@@ -1,0 +1,50 @@
+// Biến màu sắc và kích thước để dễ quản lý
+$primary-bg: #1a202c;
+$secondary-bg: #2d3748;
+$panel-border: #4a5568;
+$text-color: #e2e8f0;
+$header-color: #a0aec0;
+$accent-color: #48bb78;
+
+
+.body-game-page {.header {
+    .header-area {
+        display: none;
+    }
+}
+    .footer {
+        display: none;
+    }
+}
+.game-page-layout {
+  height: 100vh;
+  background-color: var(--game-bg-color);
+  display: grid;
+  grid-template-columns: 350px 1fr 350px; // Left, Center, Right
+  grid-template-rows: 1fr 1fr; // 2 hàng
+  grid-template-areas:
+    "char world quests"
+    "char world inventory";
+  gap: 15px;
+  padding: 15px;
+}
+
+// Gán các component vào đúng khu vực
+.game-character-panel { grid-area: char; }
+.game-world-panel { grid-area: world; }
+.game-quest-panel { grid-area: quests; }
+.game-inventory-panel { grid-area: inventory; }
+
+// Style cho màn hình loading
+.loading-screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--game-bg-color);
+  h1 {
+    font-family: var(--font-pixel);
+    color: var(--text-title-color);
+    text-shadow: 0 0 10px var(--accent-color);
+  }
+}
